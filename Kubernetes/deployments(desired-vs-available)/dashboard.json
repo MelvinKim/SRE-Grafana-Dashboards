@@ -1,0 +1,289 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "target": {
+            "limit": 100,
+            "matchAny": false,
+            "tags": [],
+            "type": "dashboard"
+          },
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "id": 34,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "yUPb33p4z"
+        },
+        "description": "Number of Replicas Defined in Spec",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "yUPb33p4z"
+            },
+            "editorMode": "code",
+            "expr": "sum by (deployment)(kube_deployment_status_replicas_available{country=\"$country\", environment=\"$env\", namespace=\"$namespace\", deployment=\"$deployment\"})",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Desired  Replicas",
+        "type": "stat"
+      },
+      {
+        "datasource": {
+          "type": "prometheus",
+          "uid": "yUPb33p4z"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "9.3.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "prometheus",
+              "uid": "yUPb33p4z"
+            },
+            "editorMode": "code",
+            "expr": "sum by (deployment)(kube_deployment_status_replicas_available{country=\"$country\", environment=\"$env\", namespace=\"$namespace\", deployment=\"$deployment\"})",
+            "legendFormat": "__auto",
+            "range": true,
+            "refId": "A"
+          }
+        ],
+        "title": "Available Replicas",
+        "type": "stat"
+      }
+    ],
+    "schemaVersion": 37,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "current": {
+            "selected": false,
+            "text": "kenya",
+            "value": "kenya"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "yUPb33p4z"
+          },
+          "definition": "label_values(up{service=\"k8s\"},country)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Country",
+          "multi": false,
+          "name": "country",
+          "options": [],
+          "query": {
+            "query": "label_values(up{service=\"k8s\"},country)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "Prod",
+            "value": "prod"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Env",
+          "multi": false,
+          "name": "env",
+          "options": [
+            {
+              "selected": true,
+              "text": "Prod",
+              "value": "prod"
+            },
+            {
+              "selected": false,
+              "text": "Prod-int",
+              "value": "prod-int"
+            }
+          ],
+          "query": "Prod : prod, Prod-int : prod-int",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "kms",
+            "value": "kms"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "yUPb33p4z"
+          },
+          "definition": "label_values(kube_pod_info{country=\"$country\",environment=\"$env\"}, namespace)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Namespace",
+          "multi": false,
+          "name": "namespace",
+          "options": [],
+          "query": {
+            "query": "label_values(kube_pod_info{country=\"$country\",environment=\"$env\"}, namespace)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        },
+        {
+          "current": {
+            "selected": false,
+            "text": "kms-deployment",
+            "value": "kms-deployment"
+          },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "yUPb33p4z"
+          },
+          "definition": "label_values(kube_deployment_created{country=\"$country\",environment=\"$env\",namespace=\"$namespace\"}, deployment)",
+          "hide": 0,
+          "includeAll": false,
+          "label": "Deployment",
+          "multi": false,
+          "name": "deployment",
+          "options": [],
+          "query": {
+            "query": "label_values(kube_deployment_created{country=\"$country\",environment=\"$env\",namespace=\"$namespace\"}, deployment)",
+            "refId": "StandardVariableQuery"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "type": "query"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Deployments (Desired vs Available)",
+    "uid": "ImZuSWNSk",
+    "version": 5,
+    "weekStart": ""
+  }
